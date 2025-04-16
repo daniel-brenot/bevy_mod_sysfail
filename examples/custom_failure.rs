@@ -17,11 +17,16 @@ use bevy::prelude::*;
 use bevy_mod_sysfail::prelude::*;
 use bevy_mod_sysfail::{Callsite, Level, LogLevelModifier};
 use thiserror::Error;
+use bevy_debug_text_overlay::OverlayPlugin; // Ensure the correct path is imported
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_plugins(bevy_debug_text_overlay::OverlayPlugin { font_size: 23.0, ..default() })
+        .add_plugin(OverlayPlugin {
+            fallback_color: bevy::render::Color::srgba(1.0,1.0,1.0,1.0),
+            font_size: 26.0,
+            ..Default::default()
+        })
         .add_systems(Startup, setup)
         .add_systems(Update, (print_generic, print_specialized))
         .run();

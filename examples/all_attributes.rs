@@ -32,7 +32,7 @@ fn main() {
 
 #[sysfail(Log<GizmoError>)]
 fn drag_gizmo(time: Res<Time>) {
-    println!("drag time is: {}", time.elapsed_seconds());
+    println!("drag time is: {}", time.elapsed_secs());
     let _ = Err(GizmoError::Error)?;
     println!("This will never print");
 }
@@ -56,7 +56,7 @@ fn exclusive_system(_: &mut World, mut has_printed: Local<bool>) {
 /// This also has some doc
 #[sysfail(Ignore)]
 fn delete_gizmo(time: Res<Time>, mut query: Query<&mut Transform>, foos: Query<Entity, With<Foo>>) {
-    println!("delete time is: {}", time.elapsed_seconds());
+    println!("delete time is: {}", time.elapsed_secs());
     for foo in &foos {
         let mut trans = query.get_mut(foo)?;
         trans.translation += Vec3::Y;
